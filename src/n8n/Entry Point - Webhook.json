@@ -1,0 +1,192 @@
+{
+  "name": "Entry Point - Webhook",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "o3lg48rMBmLDpTWR",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/o3lg48rMBmLDpTWR",
+          "cachedResultName": "Faire Enrichment Pipeline — Error Handler"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        256,
+        0
+      ],
+      "id": "7a2a8d51-c6ef-4e0d-a9f3-feece69f952f",
+      "name": "Call 'Error Handler'"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "2e732c0b-0298-44f9-9a60-cad78450a02a",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        80,
+        -192
+      ],
+      "id": "2471a0e6-7bf9-4d78-962d-8948d38a5baf",
+      "name": "Webhook for HRIS data",
+      "webhookId": "2e732c0b-0298-44f9-9a60-cad78450a02a",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "lvkYrqsgq6KyNoor",
+          "name": "Onboarding Header Auth"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        656,
+        -208
+      ],
+      "id": "ab5f24fd-2643-4c6c-bc3a-7dc61d111168",
+      "name": "Reformat XML payload to JSON"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "0rriU4ZKBRdc8yfg",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/0rriU4ZKBRdc8yfg",
+          "cachedResultName": "BetterUp Onboarding Automation — Onboarding Workflow"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        928,
+        -208
+      ],
+      "id": "17d9c32c-54d7-4278-9265-bdbf20f556a2",
+      "name": "Call 'Onboarding Workflow'"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"firstName\": {{ $json.body.firstName }}\n  \"lastName\": {{ $json.body.lastName }}\n  \"email\": {{ $json.body.email }}\n  \"phone\": {{ $json.body.phone }}\n  \"jobTitle\": {{ $json.body.jobTitle }}\n  \"department\": {{ $json.body.department }}\n  \"startDate\": {{ $json.body.startDate }}\n  \"employmentType\": {{ $json.body.employmentType }}\n  \"workLocation\": {{ $json.body.workLocation }}\n  \"linkedInProfile\": {{ $json.body.linkedInProfile }}\n  \"jobId\": {{ $json.body.jobId }}\n  \"managerEmail\": {{ $json.body.managerEmail }}\n},",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        384,
+        -208
+      ],
+      "id": "0aca84b4-941e-4f3f-a64c-9ca8633b3384",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "content": "## TODO: \nFigure out XML payload logic"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        592,
+        -432
+      ],
+      "typeVersion": 1,
+      "id": "67dcce33-5714-4f30-a143-2e8594c1aea8",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## TODO: \nValidate Error Handler"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        208,
+        -432
+      ],
+      "typeVersion": 1,
+      "id": "618a185d-cb24-4d5f-ad54-40763f53b61f",
+      "name": "Sticky Note1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook for HRIS data": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Call 'Error Handler'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reformat XML payload to JSON": {
+      "main": [
+        [
+          {
+            "node": "Call 'Onboarding Workflow'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Reformat XML payload to JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "225b93f4-ef68-4d50-bc79-23b5fbdda732",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "1fc49dcc2c42fceb1e1d98e601c2763b1fe79e5b8a3671acf5815bc14ae0af5b"
+  },
+  "id": "4c0JWejscVoA9UJT",
+  "tags": []
+}

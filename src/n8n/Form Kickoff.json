@@ -1,0 +1,329 @@
+{
+  "name": "Form Kickoff",
+  "nodes": [
+    {
+      "parameters": {
+        "formId": "aQ0Jp2"
+      },
+      "type": "n8n-nodes-tallyforms.tallyTrigger",
+      "typeVersion": 2,
+      "position": [
+        32,
+        0
+      ],
+      "id": "89d70ae8-d757-4002-9c28-47a4394fb4f7",
+      "name": "Tally Trigger",
+      "webhookId": "66c79476-76f3-447e-b550-b7a33e4116b8",
+      "credentials": {
+        "tallyApi": {
+          "id": "UTmCul8rAJwxVzVf",
+          "name": "Tally account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1ohx2am2T5xuVGwLc6cV9zWbac2cZBRlflX-E6Mx9m5c",
+          "mode": "list",
+          "cachedResultName": "New Hire Form Submissions",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ohx2am2T5xuVGwLc6cV9zWbac2cZBRlflX-E6Mx9m5c/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Submissions",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ohx2am2T5xuVGwLc6cV9zWbac2cZBRlflX-E6Mx9m5c/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "First Name": "={{ $json.question_MOaNop.value }}",
+            "Last Name": "={{ $json.question_KoPP7k.value }}",
+            "Email Address": "={{ $json.question_JRlp54.value }}",
+            "Phone Number": "={{ $json.question_gAqdKl.value }}",
+            "Job Title": "={{ $json.question_LGEEAO.value }}",
+            "Department": "={{ $json.question_pA00jZ.value }}",
+            "Start Date": "={{ $json.question_1KbbZO.value }}",
+            "Employment Type": "={{ $json.question_MOrrkg.value }}",
+            "Work Location": "={{ $json.question_JRVVaY.value }}",
+            "LinkedIn Profile": "={{ $json.question_0M8BNN.value }}",
+            "Job ID": "={{ $json.question_zzMyPa.value }}",
+            "Manager Email Address": "={{ $json.question_gAQQy1.value }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email Address",
+              "displayName": "Email Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Job Title",
+              "displayName": "Job Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Department",
+              "displayName": "Department",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Start Date",
+              "displayName": "Start Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Employment Type",
+              "displayName": "Employment Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Work Location",
+              "displayName": "Work Location",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "LinkedIn Profile",
+              "displayName": "LinkedIn Profile",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Job ID",
+              "displayName": "Job ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Manager Email Address",
+              "displayName": "Manager Email Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        272,
+        0
+      ],
+      "id": "b427fafe-1b60-4dc5-8bd7-d57eca27dc5e",
+      "name": "Append row in sheet",
+      "retryOnFail": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6cPGkv2izh7DkWJ3",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://janthonysantana.app.n8n.cloud/webhook-test/2e732c0b-0298-44f9-9a60-cad78450a02a",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "firstName",
+              "value": "={{ $json['First Name'] }}"
+            },
+            {
+              "name": "lastName",
+              "value": "={{ $json['Last Name'] }}"
+            },
+            {
+              "name": "email",
+              "value": "={{ $json['Email Address'] }}"
+            },
+            {
+              "name": "phone",
+              "value": "={{ $json['Phone Number'] }}"
+            },
+            {
+              "name": "jobTitle",
+              "value": "={{ $json['Job Title'] }}"
+            },
+            {
+              "name": "department",
+              "value": "={{ $json.Department }}"
+            },
+            {
+              "name": "startDate",
+              "value": "={{ $json['Start Date'] }}"
+            },
+            {
+              "name": "employmentType",
+              "value": "={{ $json['Employment Type'] }}"
+            },
+            {
+              "name": "workLocation",
+              "value": "={{ $json['Work Location'] }}"
+            },
+            {
+              "name": "linkedInProfile",
+              "value": "={{ $json['LinkedIn Profile'] }}"
+            },
+            {
+              "name": "jobId",
+              "value": "={{ $json['Job ID'] }}"
+            },
+            {
+              "name": "managerEmail",
+              "value": "={{ $json['Manager Email Address'] }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        496,
+        0
+      ],
+      "id": "f742ebef-e5a2-4f92-ad84-29e369f7d248",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "Fl7pgDt0rbIQQxDf",
+          "name": "Unnamed credential"
+        },
+        "httpHeaderAuth": {
+          "id": "W9HVABbR7sYxAAly",
+          "name": "Onboarding Header Auth - Client"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## TODO\n\nMake the output be in XML"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        512,
+        -256
+      ],
+      "typeVersion": 1,
+      "id": "aa662142-c6d8-4a8c-881e-d843b7aca536",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Tally Trigger": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "85378025-c69c-4aae-9e65-258e223574a3",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "1fc49dcc2c42fceb1e1d98e601c2763b1fe79e5b8a3671acf5815bc14ae0af5b"
+  },
+  "id": "SHKeZ1IZcgQrONbp",
+  "tags": []
+}
